@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <script src="angular.min.js"></script>
+    <script src="main.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>Vasa Licna Lista Obaveza</h1>
+    </div>
+    <div ng - controller="todoController">
+        <form name="forma" ng - submit="addTodo()">
+            <input type="text" ng - model="newTodo" name="newtodo" required>
+            <button ng - disabled="forma.$invalid"> Napravi
+                    </button>
+        </form>
+        <button ng - click="clearCompleted()"> Obrisi izvrseno
+                                </button>
+
+        <ul>
+            <li ng - repeat="todo in todos">
+                <input type="checkbox" ng - model="todo.done">
+                <span ng - class="{'done':todo.done}"> { { todo.title } }
+                </span>
+            </li>
+        </ul>
+
+
+    </div>
+</body>
+
+</html>

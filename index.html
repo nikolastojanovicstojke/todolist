@@ -1,60 +1,32 @@
 <!DOCTYPE html>
-<html ng-app="ToDo">
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Todo</title>
-    <style>
-        .done {
-            text-decoration: line-through;
-            color: #ccc;
-        }
-    </style>
-</head>
+<body ng-app="myApp">
 
-<body>
+    <p><a href="main">Main</a></p>
 
-    <div ng-controller="todoController">
-
-        <form name="forma" ng-submit="addTodo()">
-            <input type="text" ng-model="newTodo" name="newtodo" required>
-            <button ng-disabled="forma.$invalid">Napravi</button>
-        </form>
-        <button ng-click="clearCompleted()">Obrisi izvrseno</button>
-
-        <ul>
-            <li ng-repeat="todo in todos">
-                <input type="checkbox" ng-model="todo.done">
-                <span ng-class="{'done':todo.done}">{{todo.title}}</span>
-            </li>
-        </ul>
+    <p><a href="login">Login</a></p>
 
 
-    </div>
 
+    <div ng-view></div>
 
-    <script src="angular.min.js"></script>
     <script>
-        angular.module('ToDo', []).
-        controller('todoController', ['$scope', function($scope) {
-            $scope.todos = [{
-                'title': 'Pravljenje todo',
-                'done': false
-            }];
-            $scope.addTodo = function() {
-                $scope.todos.push({
-                    'title': $scope.newTodo,
-                    'done': false
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider) {
+            $routeProvider
+                .when("/main", {
+                    templateUrl: "main.html"
                 })
-                $scope.newTodo = ''
-            }
-            $scope.clearCompleted = function() {
-                $scope.todos = $scope.todos.filter(function(item) {
-                    return !item.done
-                })
-            }
-        }])
+                .when("/login", {
+                    templateUrl: "login.html"
+                });
+
+        });
     </script>
+
 </body>
 
 </html>
